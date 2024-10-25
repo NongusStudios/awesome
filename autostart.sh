@@ -17,7 +17,7 @@ run blueberry-tray
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run numlockx on
 #run nitrogen --restore
-run conky -c $HOME/.config/awesome/system-overview
+#run conky -c $HOME/.config/awesome/system-overview
 #you can set wallpapers in themes as well
 #run applications from startup
 #run firefox
@@ -28,3 +28,4 @@ run conky -c $HOME/.config/awesome/system-overview
 #run ckb-next -b
 #run discord
 #run telegram-desktop
+xset r rate 300 50

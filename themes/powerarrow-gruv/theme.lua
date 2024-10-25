@@ -14,22 +14,35 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local colours = {
+    bg="#282828",
+    fg="#fbf1c7",
+    red="#cc241d",
+    green="#98971a",
+    yellow="#d79921",
+    blue="#458588",
+    purple="#b16286",
+    aqua="#689d6a",
+    gray="#928374",
+    orange="#d65d0e"
+}
+
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-gruv"
 theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Source Code Pro Regular 11"
 theme.taglist_font                              = "Source Code Pro Regular 13"
-theme.fg_normal                                 = "#d5c4a1"
+theme.fg_normal                                 = colours.fg
 theme.fg_focus                                  = theme.fg_normal
-theme.fg_urgent                                 = "#cc241d"
-theme.bg_normal                                 = "#458588"
-theme.bg_focus                                  = "#3c3836"
-theme.bg_urgent                                 = "#cc241d"
+theme.fg_urgent                                 = colours.red
+theme.bg_normal                                 = colours.aqua
+theme.bg_focus                                  = colours.bg
+theme.bg_urgent                                 = colours.red
 theme.border_width                              = dpi(2)
-theme.border_normal                             = "#928374"
-theme.border_focus                              = "#98971a"
-theme.border_marked                             = "#689d6a"
-theme.tasklist_bg_focus                         = "#3c3836"
+theme.border_normal                             = colours.gray
+theme.border_focus                              = colours.aqua
+theme.border_marked                             = colours.red
+theme.tasklist_bg_focus                         = colours.bg
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_fg_focus                         = theme.fg_focus
@@ -321,30 +334,38 @@ function theme.at_screen_connect(s)
             spr,
             volicon,
             theme.volume.widget,
-            arrl_ld,
-            wibox.container.background(memicon, theme.bg_focus),
-            wibox.container.background(mem.widget, theme.bg_focus),
-            wibox.container.background(fsicon, theme.bg_focus),
-            wibox.container.background(theme.fs.widget, theme.bg_focus),
-            arrl_dl,
-            cpuicon,
-            cpu.widget,
-            arrl_ld,
-            wibox.container.background(tempicon, theme.bg_focus),
-            wibox.container.background(temp.widget, theme.bg_focus),
-            arrl_dl,
-            neticon,
-            net.widget,
-            arrl_ld,
-            wibox.container.background(clock, theme.bg_focus),
-            wibox.container.background(spr, theme.bg_focus),
-            arrl_dl,
+
+            separators.arrow_left("alpha", colours.purple),
+            wibox.container.background(memicon, colours.purple),
+            wibox.container.background(mem.widget, colours.purple),
+            
+            separators.arrow_left(colours.purple, colours.orange),
+            wibox.container.background(fsicon, colours.orange),
+            wibox.container.background(theme.fs.widget, colours.orange),
+
+            separators.arrow_left(colours.orange, colours.blue),
+            wibox.container.background(cpuicon, colours.blue),
+            wibox.container.background(cpu.widget, colours.blue),
+
+            separators.arrow_left(colours.blue, colours.red),
+            wibox.container.background(tempicon, colours.red),
+            wibox.container.background(temp.widget, colours.red),
+
+            separators.arrow_left(colours.red, colours.green),
+            wibox.container.background(neticon, colours.green),
+            wibox.container.background(net.widget, colours.green),
+
+            separators.arrow_left(colours.green, colours.gray),
+            wibox.container.background(clock, colours.gray),
+            wibox.container.background(spr, colours.gray),
+            
+            separators.arrow_left(colours.gray, colours.aqua),
             wibox.widget.systray(),
             s.mylayoutbox,
         },
     }
 
-    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = colours.green, fg = theme.fg_normal })
 
         -- Add widgets to the bottom wibox
         s.mybottomwibox:setup {
