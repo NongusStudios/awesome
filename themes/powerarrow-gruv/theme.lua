@@ -188,7 +188,7 @@ theme.mpd = lain.widget.mpd({
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local mem = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.font, " " .. mem_now.used .. "MB "))
+        widget:set_markup(markup.font(theme.font, " " .. string.format("%.1f", mem_now.used/1000) .. "/" .. string.format("%.0f", mem_now.total/1000)  .. "GB "))
     end
 })
 
@@ -365,7 +365,7 @@ function theme.at_screen_connect(s)
         },
     }
 
-    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = colours.green, fg = theme.fg_normal })
+    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
 
         -- Add widgets to the bottom wibox
         s.mybottomwibox:setup {
